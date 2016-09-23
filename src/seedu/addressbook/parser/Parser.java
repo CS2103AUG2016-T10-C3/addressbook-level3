@@ -24,7 +24,8 @@ public class Parser {
                     + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+                    + "(?<tagArguments>(?: t/[^/]+)*)" // variable number of tags
+                    + "(?<isFavouritePrivate>p?) f/(?<isFavourite>[^/]+"); 
 
 
     /**
@@ -114,7 +115,10 @@ public class Parser {
                     matcher.group("address"),
                     isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
 
-                    getTagsFromArgs(matcher.group("tagArguments"))
+                    getTagsFromArgs(matcher.group("tagArguments")),
+                    
+                    matcher.group("isFavourite"),
+                    isPrivatePrefixPresent(matcher.group("isFavouritePrivate"))
             );
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
