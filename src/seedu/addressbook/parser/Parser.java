@@ -26,7 +26,6 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
-
     /**
      * Signals that the user input could not be parsed.
      */
@@ -82,6 +81,9 @@ public class Parser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+            
+            case EditPhoneCommand.COMMAND_WORD:
+                return prepareEditPhone(arguments);
 
             case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
@@ -228,5 +230,16 @@ public class Parser {
         return new FindCommand(keywordSet);
     }
 
+    /**
+     * Parses arguments in the context of the edit phone command
+     * Assumes the inputs are correct without checking
+     * 
+     * @return the prepared command
+     */
+    
+    private Command prepareEditPhone(String args) {
+           String[] details = args.trim().split(" ");
+           return new EditPhoneCommand(details);
+    }
 
 }
