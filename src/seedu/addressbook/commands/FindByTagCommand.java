@@ -13,5 +13,10 @@ public class FindByTagCommand extends Command{
     public FindByTagCommand(Set<String> keywords) {
         this.keywords = keywords;
     }
-
+    
+    @Override
+    public CommandResult execute() {
+        final List<ReadOnlyPerson> personsFound = getPersonsWithTagContainingAnyKeyword(keywords);
+        return new CommandResult(getMessageForPersonListShownSummary(personsFound), personsFound);
+    }
 }
