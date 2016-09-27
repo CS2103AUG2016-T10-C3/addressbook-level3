@@ -84,6 +84,9 @@ public class Parser {
             
             case EditPhoneCommand.COMMAND_WORD:
                 return prepareEditPhone(arguments);
+                
+            case ConfirmCommand.COMMAND_WORD:
+                return prepareConfirm(arguments);
 
             case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
@@ -242,4 +245,8 @@ public class Parser {
            return new EditPhoneCommand(details);
     }
 
+    private Command prepareConfirm(String args) {
+        return new ConfirmCommand(args);
+    }
+    
 }
